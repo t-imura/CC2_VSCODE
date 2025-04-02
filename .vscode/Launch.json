@@ -1,0 +1,31 @@
+{
+
+    "version": "0.2.0",
+    "configurations": [
+    {
+      "name": "(gdb) 起動",
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "${workspaceFolder}/build/Debug/test_my_class.exe",
+      "args": [],
+      "stopAtEntry": false,
+      "cwd": "${workspaceFolder}",
+      "environment": [],
+      "externalConsole": false,
+      "MIMode": "gdb",
+      "miDebuggerPath": "C:/Program Files/W64devkit/bin/gdb.exe",
+      "setupCommands": [
+                           {
+                                 "description": "gdb の再フォーマットを有効にする",
+                                  "text": "-enable-pretty-printing",
+                                   "ignoreFailures": true
+                           },
+                           {
+                                 "description":  "逆アセンブリ フレーバーを Intel に設定",
+                                 "text": "-gdb-set disassembly-flavor intel",
+                                 "ignoreFailures": true
+                           }
+      ]
+    }
+    ]
+}
