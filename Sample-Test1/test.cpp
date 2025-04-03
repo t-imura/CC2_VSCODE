@@ -7,9 +7,9 @@ class TestFixture : public testing::Test
 {
 protected:
 	MyClass sampletestMyClass;
-	MyClass2 sampletestMyClass2;
+	MyClass2 sampletestMyClass2; 
 	virtual void SetUp() {
-		sampletestMyClass.initsettings();　
+		sampletestMyClass.initsettings();
 		sampletestMyClass2.initsettings();
 	}
 };
