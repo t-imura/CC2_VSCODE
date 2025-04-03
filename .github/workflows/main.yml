@@ -1,0 +1,45 @@
+# Pushイベントでmainブランチに変更があった場合
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+    # リポジトリのコードをGitHub Actionsにチェックアウト
+    - name: Checkout code
+      uses: actions/checkout@v2
+      with:
+        submodules: true  # サブモジュールを含めてリポジトリをチェックアウト
+
+    # CMakeのセットアップ
+    - name: Set up CMake
+      uses: threeal/cmake-action@v2.1.0  # threeal/cmake-actionの使用
+      
+    # VisualStudio2022を使用してビルド構成を作成
+    - name: Configure CMake
+      run: |
+        # buildディレクトリの削除／生成
+        Remove-Item -Recurse -Force build
+        mkdir build
+        cd build
+        # ビルド構成を作成
+        cmake .. -G "Visual Studio 17 2022"
+
+    # プロジェクトをDebug設定でビルド
+    - name: Build project
+      run: |
+        cd build
+        cmake --build . --config Debug
+
+    # CMakeのテストランナーを使ってテストを実行
+    - name: Run testscd
+      run: |
+        cd build
+        ctest -C Debug
